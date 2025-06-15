@@ -111,4 +111,36 @@ function polyReverse(array) {
 
 console.log(polyReverse(numbersForPolyReverse))
 
+//иммутабельный метод массива
+//.slice() возвращает новый массива, содержащий копию части исходного массива
+
+const animals = ["ant", "bison", "camel", "duck", "elephant"];
+
+function polySlice(array, start = 0, end = array.length) {
+
+    const result = []
+
+    start = start < 0 ? array.length + start : start
+    end = end < 0 ? array.length + end : end
+
+    for (let i = start; i < end; i++) {
+        // достаем элементы array[i] со 2го по 6ой и кладем в массив result
+        // если параметры не указаны, то берутся параметры по умолчанию и возвращается полная копия массива
+        if (array[i]) {
+            // проверка нужна для того, чтобы если передано значение больше чем end, не добавлялись undefined в конец массива
+            polyPush(result, array[i])
+        }
+    }
+
+    return result
+}
+
+// console.log(polySlice(animals, 2)) // ["camel", "duck", "elephant"]
+// console.log(polySlice(animals, 2, 4)) // ["camel", "duck"]
+// console.log(polySlice(animals, 1, 5)) // ["bison", "camel", "duck", "elephant"]
+// console.log(polySlice(animals, -2)) // ["duck", "elephant"]
+// console.log(polySlice(animals, 2, -1)) // ["camel", "duck"]
+
+//вернется копия исходного массива
+console.log(polySlice(animals)) // ["ant", "bison", "camel", "duck", "elephant"]
 
