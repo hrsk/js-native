@@ -128,3 +128,29 @@ Array.prototype.newMethod = function () {
 array.newMethod();
 [1, 2, 10, 30].newMethod();
 
+
+//контекст вызова -- тот объект, который стоит перед точкой
+//this -- контекст вызова функции, он определятся только в момент вызова функции,
+// НЕ в момент объявления функции, а в момент ее ВЫЗОВА!!!
+
+//TODO: стрелочная функция определяет контекст вызова,
+// но контекстом вызова для нее всегда будет объект window
+
+Array.prototype.customMap = function (callback) {
+    const result = [] // создаем новый массив
+//пробегаемся по исходному массиву this
+    for (let i = 0; i < this.length; i++) {
+        // берем каждый элемент исходного массива и возвращаем результат выполнения того, что придет в callback функции
+        const element = callback(this[i])
+        //складываем результат выполнения в новый массив
+        result.push(element)
+    }
+    return result
+}
+
+// что нужно сделать с каждым элементом массива передаем в качестве callback функции,
+// бери каждый элемент и в новй массив клади его квадрат
+
+const callbackFn = (element) => element * element
+console.log(array.customMap(callbackFn))
+console.log(array.map(el => el * el))
