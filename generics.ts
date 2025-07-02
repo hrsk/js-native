@@ -70,3 +70,16 @@ console.log(updateArray(stringArray, "strawberry")) // ['apple', 'banana', 'cher
 const numberArray = [1, 2, 3]
 console.log(updateArray(numberArray, 2)) // [1, 2, 3]
 console.log(updateArray(numberArray, 4)) // [1, 2, 3, 4]
+
+
+const getValue = <T , K extends keyof T>(obj: T, key: K ): T[K] => {
+    return obj[key]
+}
+
+// Example:
+const person: Person = { name: "Alice", age: 30 };
+const name = getValue(person, "name"); // Type is string
+const age = getValue(person, "age");   // Type is number
+
+console.log(name) // Alice
+console.log(age) // 30
