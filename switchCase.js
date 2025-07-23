@@ -18,3 +18,16 @@ switch (name) {
         // если в кейса выше не будет break или return
         console.log('Hello')
 }
+
+const x = 6;
+switch (true) {
+    case x > 5 && x < 10:
+        console.log('x > 5 && x < 10');
+        break;
+    case x >= 10:
+        console.log('x >= 10');
+        break;
+    case x <= 5 :
+        console.log('x <= 5');
+        break;
+}
