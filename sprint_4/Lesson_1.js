@@ -19,6 +19,7 @@ websocket.on('message', function () {
 */
 
 // ----
+/*
 
 const button = {
     subscribers: {
@@ -58,14 +59,19 @@ button.click() // вызов события
 button.removeEventListener('click', openModal()) // отписка от собыитя
 //
 button.click() // вызов события
+*/
+
 
 // const unsubscribe = button.addEventListener('click', openModal()) // подписка на событие
 // button.click()
 // unsubscribe()
 // button.click()
 
+// -----
+
 //Events
 
+/*
 
 // const smallDiv = document.getElementById('small')
 const smallDiv = document.querySelector('#small')
@@ -77,8 +83,13 @@ const clickMe = document.querySelector('#buttonId')
 
 function eventHandler(event) {
     console.log('click')
+    //TODO: target -- «целевой» элемент, на котором произошло событие,
+    // содержит ссылку на конкретный элемент внутри формы, на котором произошёл клик.
+    // в процессе всплытия он неизменен.
     console.log('target:', event.target.id)
+    //TODO: currentTarget -- элемент, на котором сработал обработчик события.
     console.log('current target:', event.currentTarget.id)
+    console.log('this:', this.id)
     //TODO: если у элемнта несколько обработчикв на одно событие,
     // то даже при прекращении всплытия все они будут выполнены.
     // stopPropagation препятсвует продвижению события,
@@ -95,9 +106,8 @@ function eventHandler2(event) {
 }
 
 
-smallDiv.addEventListener('click', eventHandler)
+smallDiv.addEventListener('click', eventHandler, false)
 smallDiv.addEventListener('click', eventHandler2)
-
 mediumDiv.addEventListener('click', eventHandler)
 bigDiv.addEventListener('click', eventHandler)
 body.addEventListener('click', eventHandler)
@@ -117,3 +127,43 @@ function buttonEventHandler() {
 }
 
 clickMe.addEventListener('click', buttonEventHandler)
+*/
+
+
+const field = document.querySelector('#contents')
+
+function fieldEventHandler(event) {
+
+    const target = event.target.closest('a')
+
+    function handleLink(href) {
+        const isLeaving = confirm(`Leave for ${href}?`);
+        if (!isLeaving) {
+            return event.preventDefault()
+        }
+    }
+
+    if (target && this.contains(target)) {
+        return handleLink(target.getAttribute('href'));
+    }
+
+}
+
+field.addEventListener('click', fieldEventHandler)
+
+//
+// const contents = document.getElementById('contents')
+//
+// contents.onclick = function(event) {
+//
+//     function handleLink(href) {
+//         let isLeaving = confirm(`Leave for ${href}?`);
+//         if (!isLeaving) return false;
+//     }
+//
+//     let target = event.target.closest('a');
+//
+//     if (target && contents.contains(target)) {
+//         return handleLink(target.getAttribute('href'));
+//     }
+// };
